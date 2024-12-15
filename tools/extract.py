@@ -58,14 +58,8 @@ base_table = {
 }
 patterns = [
     (b'\xa0\x1E\x00\x9b\x83\x00', '<END>'),
-    (b'\xa0\x14\x00', '<PAUSE>'),
-    (b'\x87\x06\x00', '<SHORTPAUSE>'),
     (b'\x9b\x83\x04\x00\xbb\x00\xe4\x00\x00', '<END2>'),
     (b'\x9b\x83\x04\x00', '<NEXT>'),
-    (b'\x88\x52\x00\x30\x00\x0D\x03\x8f\x00\x08\x86\x00\x00', '<BLUE>'),
-    (b'\xe9\x92\x01\x11\xe9', '<YoN>'),
-    (b'\x9c\x20\x00\x92\x01\x00\xe9', '<Yes>'),
-    (b'\x86\x01\x00\x93\x80', '<NO>'),
     (b'\x00\x80\xFF\x88\x40\x00\x24\x00\x10\x03\x8F\x00', '<DIALOG>'),
     (b'\x88\x40\x00\xA2\x00\x10\x03\x8F\x00\x08\x4E', '<DIALOG2>')
 ]
@@ -140,7 +134,10 @@ def process_files_in_directory(directory):
     
     adjusted_table = adjust_table(base_table, new_e_position=0x33)
 
-    txt_directory = directory  # Diretório onde os arquivos .txt serão salvos
+
+    txt_directory = os.path.join(os.getcwd(), "txt")
+    os.makedirs(txt_directory, exist_ok=True)
+    
     for file in files:
         # Ignorar arquivos na lista de exclusão
         if file in exclude_files:
@@ -166,7 +163,7 @@ def process_files_in_directory(directory):
             print(f"Erro ao processar o arquivo {file}: {e}")
     
     # Chamar refind para verificar os arquivos gerados
-    refind(txt_directory)
+    #refind(txt_directory)
 
 if __name__ == "__main__":
     process_files_in_directory(directory)
