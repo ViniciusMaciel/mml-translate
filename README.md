@@ -43,3 +43,7 @@ base_table = {
 ### Translation Script
 
 Based on this table, the `extract.py` script was developed. This script accesses the BIN files and attempts to translate hexadecimal values into text.
+
+The `generate.py` script takes the generated text and transforms it into a `.json` file containing the original text and the new text.
+
+Finally, the `translate.py` script processes the content placed inside the JSON file, searches for the corresponding values in the BIN file, and replaces them with the new values.
